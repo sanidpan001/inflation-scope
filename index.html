@@ -1,0 +1,1752 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <!-- =========================================================
+       INFLATION SCOPE
+       Worldwide Inflation Calculator
+       Single-file production-ready HTML
+       ========================================================= -->
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+  <meta name="theme-color" content="#0b1020">
+
+  <title>Inflation Calculator - Calculate Purchasing Power & Inflation</title>
+
+  <meta name="description"
+        content="Free inflation calculator to calculate how prices and purchasing power change over time. Compare historical money values, inflation rates and future purchasing power. Unlimited use with no subscription.">
+
+  <meta name="keywords"
+        content="inflation calculator, inflation calculator worldwide, purchasing power calculator, money inflation calculator, historical inflation calculator, future value calculator, inflation rate calculator, CPI calculator">
+
+  <meta name="author" content="InflationScope">
+
+  <meta name="robots"
+        content="index, follow, max-image-preview:large">
+
+  <link rel="canonical"
+        href="https://inflationscope.example/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title"
+        content="Inflation Calculator - InflationScope">
+  <meta property="og:description"
+        content="Calculate inflation, purchasing power and future money value with our free unlimited inflation calculator.">
+  <meta property="og:url"
+        content="https://inflationscope.example/">
+  <meta property="og:site_name"
+        content="InflationScope">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title"
+        content="Inflation Calculator - InflationScope">
+  <meta name="twitter:description"
+        content="Free worldwide inflation and purchasing power calculator.">
+
+  <!-- Performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+  <!-- =========================================================
+       STRUCTURED DATA
+       ========================================================= -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebApplication",
+    "name":"InflationScope Inflation Calculator",
+    "applicationCategory":"FinanceApplication",
+    "operatingSystem":"Any",
+    "description":"Free online inflation calculator for calculating purchasing power and inflation-adjusted money values.",
+    "offers":{
+      "@type":"Offer",
+      "price":"0",
+      "priceCurrency":"USD"
+    },
+    "featureList":[
+      "Inflation calculation",
+      "Purchasing power calculation",
+      "Future value calculation",
+      "Historical value comparison",
+      "Unlimited usage"
+    ]
+  }
+  </script>
+
+  <!-- FAQ structured data -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"What is an inflation calculator?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"An inflation calculator estimates how the purchasing power or value of money changes over time because of inflation."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"How does an inflation calculator work?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"The calculator applies an inflation rate over a selected number of years to estimate the future or equivalent value of money."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Can I use this inflation calculator for free?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Yes. InflationScope is designed for unlimited free use without a subscription."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    /* =========================================================
+       GLOBAL
+       ========================================================= */
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Inter", Arial, sans-serif;
+      background:
+        radial-gradient(circle at 10% 10%, rgba(99,102,241,.18), transparent 30%),
+        radial-gradient(circle at 90% 15%, rgba(14,165,233,.14), transparent 30%),
+        #080d1b;
+      color: #f8fafc;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    .container {
+      width: min(1160px, calc(100% - 32px));
+      margin: auto;
+    }
+
+    /* =========================================================
+       HEADER
+       ========================================================= */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(18px);
+      background: rgba(8,13,27,.86);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+
+    .nav {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      font-weight: 800;
+      font-size: 21px;
+      letter-spacing: -.5px;
+    }
+
+    .logo {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 13px;
+      background: linear-gradient(135deg,#7c3aed,#06b6d4);
+      box-shadow: 0 10px 30px rgba(99,102,241,.3);
+      font-size: 20px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-link {
+      padding: 10px 15px;
+      border-radius: 10px;
+      color: #cbd5e1;
+      transition: .2s ease;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .nav-link:hover {
+      color: white;
+      background: rgba(255,255,255,.07);
+    }
+
+    .more-tools {
+      background: linear-gradient(135deg,#6366f1,#8b5cf6);
+      color: white;
+    }
+
+    /* =========================================================
+       HERO
+       ========================================================= */
+
+    .hero {
+      text-align: center;
+      padding: 72px 0 42px;
+    }
+
+    .badge {
+      display: inline-flex;
+      padding: 7px 13px;
+      border-radius: 999px;
+      background: rgba(99,102,241,.12);
+      border: 1px solid rgba(129,140,248,.25);
+      color: #c4b5fd;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: clamp(36px,6vw,64px);
+      line-height: 1.05;
+      letter-spacing: -2.5px;
+      margin-bottom: 20px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg,#a78bfa,#38bdf8);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      max-width: 730px;
+      margin: auto;
+      color: #aeb9cc;
+      font-size: 17px;
+    }
+
+    /* =========================================================
+       ADS
+       ========================================================= */
+
+    .ad-wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 110px;
+      margin: 20px 0 30px;
+      overflow: hidden;
+    }
+
+    .ad-box {
+      min-height: 90px;
+      min-width: 320px;
+      max-width: 728px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* =========================================================
+       CALCULATOR
+       ========================================================= */
+
+    .calculator-section {
+      padding: 10px 0 30px;
+    }
+
+    .calculator {
+      max-width: 900px;
+      margin: auto;
+      padding: 32px;
+      border-radius: 28px;
+      background: rgba(15,23,42,.9);
+      border: 1px solid rgba(255,255,255,.09);
+      box-shadow:
+        0 30px 80px rgba(0,0,0,.35),
+        inset 0 1px 0 rgba(255,255,255,.04);
+    }
+
+    .calculator-title {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .calculator-title h2 {
+      font-size: 28px;
+      margin-bottom: 7px;
+    }
+
+    .calculator-title p {
+      color: #94a3b8;
+      font-size: 14px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2,1fr);
+      gap: 18px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      color: #cbd5e1;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 14px 15px;
+      border: 1px solid #26334b;
+      background: #0b1325;
+      color: white;
+      border-radius: 12px;
+      outline: none;
+      transition: .2s ease;
+    }
+
+    input:focus,
+    select:focus {
+      border-color: #818cf8;
+      box-shadow: 0 0 0 3px rgba(99,102,241,.12);
+    }
+
+    .calculate-btn {
+      grid-column: 1 / -1;
+      border: 0;
+      cursor: pointer;
+      padding: 16px;
+      border-radius: 13px;
+      color: white;
+      font-weight: 800;
+      background: linear-gradient(135deg,#6366f1,#8b5cf6);
+      box-shadow: 0 15px 30px rgba(99,102,241,.24);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .calculate-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 20px 35px rgba(99,102,241,.35);
+    }
+
+    .result {
+      margin-top: 26px;
+      display: none;
+      padding: 25px;
+      border-radius: 18px;
+      background: linear-gradient(
+        135deg,
+        rgba(99,102,241,.13),
+        rgba(14,165,233,.08)
+      );
+      border: 1px solid rgba(129,140,248,.2);
+    }
+
+    .result.show {
+      display: block;
+      animation: fadeIn .35s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .result-main {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .result-main span {
+      display: block;
+      color: #94a3b8;
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+
+    .result-main strong {
+      font-size: clamp(30px,5vw,46px);
+      line-height: 1.2;
+      background: linear-gradient(90deg,#c4b5fd,#67e8f9);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .result-grid {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 12px;
+    }
+
+    .result-card {
+      background: rgba(2,6,23,.42);
+      border: 1px solid rgba(255,255,255,.06);
+      padding: 15px;
+      border-radius: 13px;
+      text-align: center;
+    }
+
+    .result-card small {
+      display: block;
+      color: #94a3b8;
+      margin-bottom: 4px;
+    }
+
+    .result-card b {
+      font-size: 16px;
+    }
+
+    .error {
+      color: #fca5a5;
+      margin-top: 10px;
+      font-size: 13px;
+      display: none;
+    }
+
+    /* =========================================================
+       CONTENT
+       ========================================================= */
+
+    .content {
+      max-width: 900px;
+      margin: 35px auto;
+    }
+
+    .content-section {
+      margin-bottom: 42px;
+    }
+
+    .content h2 {
+      font-size: 30px;
+      margin-bottom: 15px;
+      letter-spacing: -.8px;
+    }
+
+    .content h3 {
+      font-size: 21px;
+      margin: 25px 0 9px;
+    }
+
+    .content p {
+      color: #b5c0d2;
+      margin-bottom: 15px;
+    }
+
+    .content ul {
+      padding-left: 23px;
+      color: #b5c0d2;
+    }
+
+    .content li {
+      margin-bottom: 8px;
+    }
+
+    .highlight {
+      padding: 20px;
+      border-left: 3px solid #818cf8;
+      background: rgba(99,102,241,.07);
+      border-radius: 10px;
+      margin: 20px 0;
+    }
+
+    /* =========================================================
+       FAQ
+       ========================================================= */
+
+    .faq {
+      max-width: 900px;
+      margin: 50px auto;
+    }
+
+    .faq h2 {
+      text-align: center;
+      margin-bottom: 24px;
+      font-size: 32px;
+    }
+
+    details {
+      background: rgba(15,23,42,.78);
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: 13px;
+      margin-bottom: 11px;
+      overflow: hidden;
+    }
+
+    summary {
+      cursor: pointer;
+      padding: 18px 20px;
+      font-weight: 700;
+      list-style: none;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    details p {
+      padding: 0 20px 18px;
+      color: #aeb9cc;
+    }
+
+    /* =========================================================
+       FOOTER
+       ========================================================= */
+
+    footer {
+      margin-top: 70px;
+      border-top: 1px solid rgba(255,255,255,.07);
+      background: rgba(2,6,23,.45);
+    }
+
+    .footer-inner {
+      padding: 35px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-brand {
+      font-weight: 800;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: #94a3b8;
+      font-size: 13px;
+    }
+
+    .footer-links a:hover {
+      color: white;
+    }
+
+    .copyright {
+      width: 100%;
+      text-align: center;
+      color: #64748b;
+      font-size: 12px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,.05);
+    }
+
+    /* =========================================================
+       MOBILE
+       ========================================================= */
+
+    @media (max-width: 700px) {
+
+      .container {
+        width: min(100% - 20px, 1160px);
+      }
+
+      .nav {
+        min-height: 65px;
+      }
+
+      .brand {
+        font-size: 17px;
+      }
+
+      .logo {
+        width: 37px;
+        height: 37px;
+      }
+
+      .nav-links {
+        gap: 2px;
+      }
+
+      .nav-link {
+        padding: 8px 9px;
+        font-size: 12px;
+      }
+
+      .hero {
+        padding: 48px 0 25px;
+      }
+
+      h1 {
+        font-size: 39px;
+        letter-spacing: -1.8px;
+      }
+
+      .hero p {
+        font-size: 14px;
+      }
+
+      .calculator {
+        padding: 20px 15px;
+        border-radius: 20px;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .field.full {
+        grid-column: auto;
+      }
+
+      .calculate-btn {
+        grid-column: auto;
+      }
+
+      .result-grid {
+        grid-template-columns: 1fr;
+      }
+
+      /*
+        Mobile advertisement:
+        The desktop banner can be 728x90.
+        On small screens it is intentionally smaller.
+      */
+
+      .ad-wrapper {
+        min-height: 70px;
+        margin: 12px 0 20px;
+      }
+
+      .ad-box {
+        min-width: 280px;
+        min-height: 60px;
+        max-width: 320px;
+        transform: scale(.82);
+      }
+
+      .content h2 {
+        font-size: 25px;
+      }
+
+      .content h3 {
+        font-size: 19px;
+      }
+
+      .footer-inner {
+        justify-content: center;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================================================
+       HEADER
+       ========================================================= -->
+
+  <header>
+    <div class="container nav">
+
+      <a class="brand" href="/">
+        <span class="logo">📈</span>
+        <span>InflationScope</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Main navigation">
+
+        <a class="nav-link" href="/">
+          Home
+        </a>
+
+        <a
+          class="nav-link more-tools"
+          href="https://fixoraa.tech"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          More Tools
+        </a>
+
+      </nav>
+    </div>
+  </header>
+
+  <!-- =========================================================
+       HERO
+       ========================================================= -->
+
+  <main>
+
+    <section class="hero container">
+
+      <span class="badge">
+        ✦ Free • Unlimited • No Subscription
+      </span>
+
+      <h1>
+        Inflation
+        <span class="gradient-text">Calculator</span>
+      </h1>
+
+      <p>
+        Calculate how inflation changes the value of money over time.
+        Estimate purchasing power, future value and the effect of
+        annual inflation in seconds.
+      </p>
+
+    </section>
+
+    <!-- =======================================================
+         TOP AD
+         ======================================================= -->
+
+    <div class="container ad-wrapper">
+      <div class="ad-box">
+
+        <!-- Adsterra -->
+        <script>
+          atOptions = {
+            'key' : '4e68ac77881c17fe128a46565d9a4e8c',
+            'format' : 'iframe',
+            'height' : 90,
+            'width' : 728,
+            'params' : {}
+          };
+        </script>
+
+        <script
+          src="https://www.highrevenueformat.com/4e68ac77881c17fe128a46565d9a4e8c/invoke.js">
+        </script>
+
+      </div>
+    </div>
+
+    <!-- =======================================================
+         CALCULATOR
+         ======================================================= -->
+
+    <section class="calculator-section container">
+
+      <div class="calculator">
+
+        <div class="calculator-title">
+          <h2>Calculate Inflation</h2>
+
+          <p>
+            Enter an amount, annual inflation rate and number of years.
+          </p>
+        </div>
+
+        <div class="form-grid">
+
+          <div class="field">
+            <label for="amount">
+              Starting Amount
+            </label>
+
+            <input
+              id="amount"
+              type="number"
+              min="0"
+              step="0.01"
+              value="1000"
+              placeholder="Example: 1000"
+            >
+          </div>
+
+          <div class="field">
+            <label for="currency">
+              Currency
+            </label>
+
+            <select id="currency">
+              <option value="$">USD ($)</option>
+              <option value="₹">INR (₹)</option>
+              <option value="€">EUR (€)</option>
+              <option value="£">GBP (£)</option>
+              <option value="¥">JPY (¥)</option>
+              <option value="C$">CAD (C$)</option>
+              <option value="A$">AUD (A$)</option>
+              <option value="CHF">CHF</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="rate">
+              Annual Inflation Rate (%)
+            </label>
+
+            <input
+              id="rate"
+              type="number"
+              min="0"
+              step="0.01"
+              value="3"
+              placeholder="Example: 3"
+            >
+          </div>
+
+          <div class="field">
+            <label for="years">
+              Number of Years
+            </label>
+
+            <input
+              id="years"
+              type="number"
+              min="0"
+              step="1"
+              value="10"
+              placeholder="Example: 10"
+            >
+          </div>
+
+          <button
+            class="calculate-btn"
+            id="calculateBtn"
+            type="button"
+          >
+            Calculate Inflation
+          </button>
+
+        </div>
+
+        <div class="error" id="error">
+          Please enter valid positive values.
+        </div>
+
+        <div class="result" id="result">
+
+          <div class="result-main">
+            <span>
+              Amount needed after the selected period
+            </span>
+
+            <strong id="futureValue">
+              $1,343.92
+            </strong>
+          </div>
+
+          <div class="result-grid">
+
+            <div class="result-card">
+              <small>Starting Amount</small>
+              <b id="startingValue">$1,000.00</b>
+            </div>
+
+            <div class="result-card">
+              <small>Total Increase</small>
+              <b id="increaseValue">$343.92</b>
+            </div>
+
+            <div class="result-card">
+              <small>Purchasing Power</small>
+              <b id="powerValue">74.41%</b>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- =======================================================
+         BOTTOM AD
+         ======================================================= -->
+
+    <div class="container ad-wrapper">
+
+      <div class="ad-box">
+
+        <!-- ClickAdilla / Ad Manager -->
+        <script
+          async
+          src="https://js.wpadmngr.com/static/adManager.js"
+          data-admpid="464498">
+        </script>
+
+      </div>
+
+    </div>
+
+    <!-- =======================================================
+         LONG-FORM SEO CONTENT
+         ======================================================= -->
+
+    <article class="content container">
+
+      <section class="content-section">
+
+        <h2>
+          What Is an Inflation Calculator?
+        </h2>
+
+        <p>
+          An inflation calculator is an online financial tool that helps
+          estimate how the value and purchasing power of money changes
+          over time. Inflation means that, on average, prices for goods
+          and services increase, which means the same amount of money
+          may buy fewer goods and services in the future.
+        </p>
+
+        <p>
+          InflationScope provides a simple way to understand this effect.
+          You can enter an initial amount, choose a currency, enter an
+          estimated annual inflation rate and select a number of years.
+          The calculator then estimates the amount that would be needed
+          in the future to have approximately the same purchasing capacity
+          as the original amount under the selected assumptions.
+        </p>
+
+        <p>
+          This can be useful for personal financial planning, education,
+          business analysis, retirement planning, budgeting and general
+          economic research. The result is an estimate rather than a
+          guarantee because actual inflation can change from year to year.
+        </p>
+
+      </section>
+
+      <section class="content-section">
+
+        <h2>
+          How Does Inflation Affect Money?
+        </h2>
+
+        <p>
+          Inflation reduces purchasing power when prices rise faster than
+          the amount of money available to spend. For example, if an item
+          costs 100 currency units today and prices rise consistently,
+          that same item could cost considerably more several years later.
+        </p>
+
+        <p>
+          The relationship is usually described using an annual inflation
+          rate. A rate of 3% means that, under a simplified constant-rate
+          assumption, prices are approximately 3% higher after one year.
+          Inflation compounds over multiple years, so the effect becomes
+          increasingly significant over longer periods.
+        </p>
+
+        <div class="highlight">
+          <strong>
+            Important:
+          </strong>
+          Actual inflation is not normally constant. The calculator uses
+          the rate you enter as an assumption so you can understand the
+          mathematical effect of inflation.
+        </div>
+
+      </section>
+
+      <section class="content-section">
+
+        <h2>
+          Inflation Calculator Formula
+        </h2>
+
+        <p>
+          The basic future-value inflation formula used by this calculator
+          is:
+        </p>
+
+        <div class="highlight">
+          Future Value = Present Value × (1 + Inflation Rate)<sup>Years</sup>
+        </div>
+
+        <p>
+          The inflation rate is converted from a percentage into a decimal
+          before the calculation. For example, an annual rate of 3% is
+          represented as 0.03.
+        </p>
+
+        <p>
+          Suppose an amount is 1,000 and the assumed annual inflation rate
+          is 3% for 10 years. The calculation becomes approximately:
+        </p>
+
+        <div class="highlight">
+          1,000 × (1.03)<sup>10</sup>
+        </div>
+
+        <p>
+          This produces an estimated future equivalent of approximately
+          1,343.92. The exact displayed result depends on the values entered
+          into the calculator.
+        </p>
+
+      </section>
+
+      <section class="content-section">
+
+        <h2>
+          What Is Purchasing Power?
+        </h2>
+
+        <p>
+          Purchasing power describes how much goods and services a unit of
+          money can purchase. When prices rise, purchasing power generally
+          decreases if income or savings do not increase at a comparable
+          rate.
+        </p>
+
+        <p>
+          Understanding purchasing power can make long-term financial
+          planning easier. A large amount of money today may appear
+          substantial, but its real economic usefulness many years later
+          depends partly on changes in prices.
+        </p>
+
+        <p>
+          This is one reason inflation is considered when evaluating
+          long-term savings goals, investment returns, salary growth,
+          business revenue and retirement needs.
+        </p>
+
+      </section>
+
+      <section class="content-section">
+
+        <h2>
+          Why Does Inflation Compound?
+        </h2>
+
+        <p>
+          Inflation compounds because each year's price increase is applied
+          to the price level created by previous increases. This means that
+          a constant annual percentage does not produce a simple linear
+          increase over a long period.
+        </p>
+
+        <p>
+          For instance, a constant 5% annual increase does not mean prices
+          will be exactly 50% higher after ten years. Compounding means the
+          mathematical increase is larger than a simple ten-times-five
+          calculation.
+        </p>
+
+        <p>
+          The effect is particularly important over long periods. Even
+          relatively modest annual rates can produce meaningful differences
+          over several decades.
+        </p>
+
+      </section>
+
+      <section class="content-section">
+
+        <h2>
+          Inflation and Personal Finance
+        </h2>
+
+        <p>
+          Inflation can influence almost every part of personal finance.
+          Household expenses, education costs, housing, transportation,
+          food, healthcare, entertainment and other spending categories
+          can all experience different price changes.
+        </p>
+
+        <p>
+          A useful financial plan therefore considers both the amount of
+          money being saved and the purchasing power that money may have
+          in the future.
+        </p>
+
+        <p>
+          Inflation calculations can help people create scenarios rather
+          than relying only on today's prices. A scenario is simply an
+          assumption used for planning. The actual future inflation rate
+          may be higher or lower.
+        </p>
+
+      </section>
+
+      <section class="content-section">
+
+        <h2>
+          Inflation and Investments
+        </h2>
+
+        <p>
+          When evaluating an investment, it can be useful to distinguish
+          between a nominal return and a return after considering inflation.
+          A nominal return describes the stated increase in monetary value,
+          while a real return attempts to account for changes in purchasing
+          power.
+        </p>
+
+        <p>
+          This does not mean inflation alone determines whether an
+          investment is suitable. Taxes, fees, risk, volatility, liquidity,
+          time horizon and other factors can also matter.
+        </p>
+
+        <p>
+          The calculator on this page is intended as a mathematical
+          estimation tool and does not provide investment advice.
+        </p>
+
+      </section>
+
+      <section class="content-section">
+
+        <h2>
+          Historical Inflation vs Estimated Inflation
+        </h2>
+
+        <p>
+          Historical inflation data and estimated future inflation are
+          different concepts. Historical data describes what happened in a
+          particular country or region during a specific period. An
+          estimated inflation rate is an assumption about what might happen
+          in the future.
+        </p>
+
+        <p>
+          This calculator allows users to enter their own inflation
+          assumption. It does not automatically claim that a single rate
+          applies to every country, currency or future period.
+        </p>
+
+        <p>
+          For serious economic research, users should consult official
+          statistical agencies and reliable economic databases for
+          country-specific consumer price data.
+        </p>
+
+      </section>
+
+      <section class="content-section">
+
+        <h2>
+          Inflation Calculator for Long-Term Planning
+        </h2>
+
+        <p>
+          Long-term planning is one of the areas where inflation
+          calculations can be particularly informative. A person planning
+          for a future expense can compare today's estimated cost with a
+          hypothetical future cost under different inflation assumptions.
+        </p>
+
+        <p>
+          For example, someone planning for an expense ten or twenty years
+          from now could calculate the future equivalent using several
+          different rates. Comparing scenarios can demonstrate how sensitive
+          a long-term plan is to changes in inflation.
+        </p>
+
+        <p>
+          Rather than depending on one exact prediction, it can be more
+          useful to consider a range of reasonable assumptions.
+        </p>
+
+      </section>
+
+      <section class="content-section">
+
+        <h2>
+          Inflation Calculator for Businesses
+        </h2>
+
+        <p>
+          Businesses also consider inflation when preparing budgets,
+          forecasting costs and evaluating future revenue. Changes in
+          supplier prices, wages, transportation costs, rent and other
+          operating expenses can influence financial projections.
+        </p>
+
+        <p>
+          A simple inflation model can provide an initial scenario for
+          planning. However, businesses often need category-specific
+          forecasts because different goods and services can experience
+          different price movements.
+        </p>
+
+      </section>
+
+      <section class="content-section">
+
+        <h2>
+          Why Use InflationScope?
+        </h2>
+
+        <p>
+          InflationScope is designed to be straightforward and accessible.
+          The calculator works directly in the browser and does not require
+          an account for the calculation itself.
+        </p>
+
+        <ul>
+          <li>Free inflation calculation.</li>
+          <li>Unlimited usage.</li>
+          <li>No subscription required.</li>
+          <li>Works on desktop and mobile screens.</li>
+          <li>Simple inflation formula.</li>
+          <li>Multiple common currency symbols.</li>
+          <li>Instant calculation.</li>
+          <li>Purchasing-power estimate.</li>
+          <li>Future-value estimate.</li>
+          <li>No watermark on the calculator.</li>
+        </ul>
+
+      </section>
+
+      <section class="content-section">
+
+        <h2>
+          Understanding Inflation Rate
+        </h2>
+
+        <p>
+          An inflation rate is normally expressed as a percentage. The
+          percentage represents the change in a selected price index or
+          price level over a particular period.
+        </p>
+
+        <p>
+          Different countries use different official statistical systems
+          and price indexes. Consumer Price Index data is commonly used to
+          measure changes in consumer prices, although the exact methodology
+          varies between statistical agencies.
+        </p>
+
+      </section>
+
+      <section class="content-section">
+
+        <h2>
+          Inflation and Salary
+        </h2>
+
+        <p>
+          Inflation can affect how salary increases translate into changes
+          in purchasing power. A salary increase that appears large in
+          nominal terms may provide a smaller improvement in purchasing
+          power if consumer prices also rise substantially.
+        </p>
+
+        <p>
+          Comparing income growth with inflation can therefore provide
+          additional context when evaluating long-term financial changes.
+        </p>
+
+      </section>
+
+      <section class="content-section">
+
+        <h2>
+          Inflation and Savings
+        </h2>
+
+        <p>
+          Savings are measured in monetary units, while purchasing power
+          depends on what those monetary units can buy. If the rate at
+          which prices rise is greater than the effective growth of savings,
+          the purchasing power of those savings can decline.
+        </p>
+
+        <p>
+          This is why long-term financial planning often considers both
+          nominal balances and inflation-adjusted values.
+        </p>
+
+      </section>
+
+      <section class="content-section">
+
+        <h2>
+          How to Use This Inflation Calculator
+        </h2>
+
+        <h3>Step 1: Enter the Amount</h3>
+
+        <p>
+          Enter the amount of money you want to evaluate. This can be a
+          current amount, historical amount or hypothetical amount.
+        </p>
+
+        <h3>Step 2: Select a Currency</h3>
+
+        <p>
+          Choose a currency symbol that best represents the amount you are
+          working with.
+        </p>
+
+        <h3>Step 3: Enter Inflation</h3>
+
+        <p>
+          Enter an assumed annual inflation rate. You can change this rate
+          to compare different scenarios.
+        </p>
+
+        <h3>Step 4: Enter the Number of Years</h3>
+
+        <p>
+          Enter how many years you want to project.
+        </p>
+
+        <h3>Step 5: Calculate</h3>
+
+        <p>
+          Click the calculate button to instantly see the estimated future
+          equivalent amount, total increase and remaining purchasing power.
+        </p>
+
+      </section>
+
+      <section class="content-section">
+
+        <h2>
+          Important Limitations
+        </h2>
+
+        <p>
+          InflationScope uses a simplified constant-rate mathematical model.
+          Real-world inflation can vary significantly from one year to
+          another. Prices for individual products can also move very
+          differently from an overall consumer inflation index.
+        </p>
+
+        <p>
+          The calculator should therefore be treated as an educational and
+          planning tool rather than an official historical inflation data
+          source or financial recommendation.
+        </p>
+
+      </section>
+
+    </article>
+
+    <!-- =======================================================
+         FAQ
+         ======================================================= -->
+
+    <section class="faq container">
+
+      <h2>
+        Frequently Asked Questions
+      </h2>
+
+      <details>
+        <summary>
+          What is an inflation calculator?
+        </summary>
+
+        <p>
+          An inflation calculator estimates how much an amount of money
+          may need to change over time under a selected annual inflation
+          assumption.
+        </p>
+      </details>
+
+      <details>
+        <summary>
+          Is InflationScope free?
+        </summary>
+
+        <p>
+          Yes. The calculator is designed for free and unlimited use
+          without requiring a subscription.
+        </p>
+      </details>
+
+      <details>
+        <summary>
+          What formula does the calculator use?
+        </summary>
+
+        <p>
+          It uses the compound inflation formula:
+          Present Value × (1 + inflation rate)<sup>years</sup>.
+        </p>
+      </details>
+
+      <details>
+        <summary>
+          Does this calculator predict actual inflation?
+        </summary>
+
+        <p>
+          No. It calculates a scenario using the annual inflation rate
+          entered by the user. Actual inflation can be different.
+        </p>
+      </details>
+
+      <details>
+        <summary>
+          Can I use the calculator on my phone?
+        </summary>
+
+        <p>
+          Yes. The website uses responsive design and adapts the calculator
+          layout to smaller screens.
+        </p>
+      </details>
+
+      <details>
+        <summary>
+          What does purchasing power mean?
+        </summary>
+
+        <p>
+          Purchasing power refers to the quantity of goods and services
+          that a particular amount of money can buy.
+        </p>
+      </details>
+
+      <details>
+        <summary>
+          Does inflation compound?
+        </summary>
+
+        <p>
+          When the same annual percentage is applied repeatedly, the
+          mathematical effect compounds because each increase builds on
+          the previous price level.
+        </p>
+      </details>
+
+      <details>
+        <summary>
+          Can I use this for financial planning?
+        </summary>
+
+        <p>
+          You can use it for general planning scenarios. For important
+          financial decisions, consider official inflation data and
+          professional financial guidance where appropriate.
+        </p>
+      </details>
+
+    </section>
+
+  </main>
+
+  <!-- =========================================================
+       FOOTER
+       ========================================================= -->
+
+  <footer>
+
+    <div class="container footer-inner">
+
+      <div class="footer-brand">
+        📈 InflationScope
+      </div>
+
+      <div class="footer-links">
+
+        <a href="/terms.html">
+          Terms
+        </a>
+
+        <a href="/privacy.html">
+          Privacy
+        </a>
+
+        <a href="/disclaimer.html">
+          Disclaimer
+        </a>
+
+        <a
+          href="https://fixoraa.tech"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          More Tools
+        </a>
+
+      </div>
+
+      <div class="copyright">
+        © 2026 InflationScope. All rights reserved.
+      </div>
+
+    </div>
+
+  </footer>
+
+  <!-- =========================================================
+       JAVASCRIPT
+       ========================================================= -->
+
+  <script>
+
+    const amountInput =
+      document.getElementById("amount");
+
+    const currencyInput =
+      document.getElementById("currency");
+
+    const rateInput =
+      document.getElementById("rate");
+
+    const yearsInput =
+      document.getElementById("years");
+
+    const calculateBtn =
+      document.getElementById("calculateBtn");
+
+    const result =
+      document.getElementById("result");
+
+    const error =
+      document.getElementById("error");
+
+    const futureValue =
+      document.getElementById("futureValue");
+
+    const startingValue =
+      document.getElementById("startingValue");
+
+    const increaseValue =
+      document.getElementById("increaseValue");
+
+    const powerValue =
+      document.getElementById("powerValue");
+
+
+    function formatMoney(value, symbol) {
+
+      return symbol +
+        Number(value).toLocaleString(
+          undefined,
+          {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+          }
+        );
+
+    }
+
+
+    function calculateInflation() {
+
+      const amount =
+        Number(amountInput.value);
+
+      const rate =
+        Number(rateInput.value);
+
+      const years =
+        Number(yearsInput.value);
+
+      const symbol =
+        currencyInput.value;
+
+
+      if (
+        !Number.isFinite(amount) ||
+        !Number.isFinite(rate) ||
+        !Number.isFinite(years) ||
+        amount < 0 ||
+        rate < 0 ||
+        years < 0
+      ) {
+
+        error.style.display = "block";
+        result.classList.remove("show");
+
+        return;
+      }
+
+
+      error.style.display = "none";
+
+
+      /*
+        Convert percentage into decimal.
+
+        Example:
+        3% = 0.03
+      */
+
+      const decimalRate =
+        rate / 100;
+
+
+      /*
+        Compound inflation formula:
+
+        Future Value =
+        Present Value ×
+        (1 + Rate)^Years
+      */
+
+      const future =
+        amount *
+        Math.pow(
+          1 + decimalRate,
+          years
+        );
+
+
+      const increase =
+        future - amount;
+
+
+      /*
+        Estimated remaining purchasing power.
+
+        Example:
+        If future price level is 1.34x,
+        purchasing power is approximately
+        1 / 1.34 = 74.4%.
+      */
+
+      const purchasingPower =
+        future === 0
+          ? 100
+          : (amount / future) * 100;
+
+
+      futureValue.textContent =
+        formatMoney(
+          future,
+          symbol
+        );
+
+
+      startingValue.textContent =
+        formatMoney(
+          amount,
+          symbol
+        );
+
+
+      increaseValue.textContent =
+        formatMoney(
+          increase,
+          symbol
+        );
+
+
+      powerValue.textContent =
+        purchasingPower.toFixed(2) +
+        "%";
+
+
+      result.classList.add("show");
+
+    }
+
+
+    calculateBtn.addEventListener(
+      "click",
+      calculateInflation
+    );
+
+
+    /*
+      Allow Enter key to calculate.
+    */
+
+    [
+      amountInput,
+      rateInput,
+      yearsInput
+    ].forEach(
+      function(input) {
+
+        input.addEventListener(
+          "keydown",
+          function(event) {
+
+            if (
+              event.key === "Enter"
+            ) {
+
+              calculateInflation();
+
+            }
+
+          }
+        );
+
+      }
+    );
+
+
+    /*
+      Recalculate automatically
+      when currency changes.
+    */
+
+    currencyInput.addEventListener(
+      "change",
+      calculateInflation
+    );
+
+
+    /*
+      Initial calculation.
+    */
+
+    calculateInflation();
+
+  </script>
+
+</body>
+</html>
+```
